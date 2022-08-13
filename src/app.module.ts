@@ -12,11 +12,11 @@ import { Team } from './teams/team.entity';
 @Module({
   imports:  [TypeOrmModule.forRoot({
     type: 'mysql',
-    host: '127.0.0.1',
-    port: 3306,
-    username: 'root',
-    password: 'Nyc11231!',
-    database: 'test',
+    host: 'mysql-codstatsapi-19237.nodechef.com',
+    port: 2461,
+    username: 'ncuser_12648',
+    password: 'E3mHf0bVYBojPlDQNm7OGNCRlbcG32',
+    database: 'codstatsapi',
     entities: [Player, Team],
     synchronize: true,
   }), PlayersModule, TeamsModule],
