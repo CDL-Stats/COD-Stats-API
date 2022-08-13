@@ -34,7 +34,7 @@
     "@nestjsx/crud-typeorm": "^5.0.0-alpha.3",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.13.2",
-    "googleapis": "^39.2.0",
+    "googleapis": "^105.0.0",
     "mongoose": "^6.5.0",
     "mysql2": "^2.3.3",
     "radium": "^0.26.2",
