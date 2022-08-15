@@ -32,7 +32,7 @@ export class PlayersController {
       return this.playersService.updatePlayer(Number(id), player);
     }
 
-    @Post(':id')
+    @Post()
     async createPlayer(@Body() player: UpdatePlayerDTO) {
       return this.playersService.createPlayer(player);
     }
