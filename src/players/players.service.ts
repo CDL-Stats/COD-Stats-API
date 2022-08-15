@@ -47,6 +47,9 @@ export class PlayersService {
                     slug: findSlug,
                 },
             },
+            order : {
+              nickName : 'asc'
+            }
         })
         if (player) {
           return player;
