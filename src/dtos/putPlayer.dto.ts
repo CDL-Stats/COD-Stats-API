@@ -5,7 +5,7 @@ import { Team } from "../teams/team.entity";
 
  
 export class UpdatePlayerDTO {
-  id?: number;
+  id: number;
   firstName?: string;
   lastName?: string;
   nickName?: string;

@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Team } from "src/teams/team.entity";
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 export enum primaryWeapons {
     AR = 'AR',
@@ -29,35 +29,35 @@ export class Player {
     @JoinColumn()
     team: Team;
 
-    @Column()
+    @Column(({nullable: true}))
     @ApiProperty()
     active: boolean;
 
-    @Column()
+    @Column(({nullable: true}))
     @ApiProperty({enum: primaryWeapons})
     primaryWeapon: primaryWeapons;
 
-    @Column()
+    @Column(({nullable: true}))
     @ApiProperty()
     birthDate: Date;
 
-    @Column()
+    @Column(({nullable: true}))
     @ApiProperty()
     twitchURL: string;
 
-    @Column()
+    @Column(({nullable: true}))
     @ApiProperty()
     youtubeURL: string;
 
-    @Column()
+    @Column(({nullable: true}))
     @ApiProperty()
     instagramURL: string;
 
-    @Column()
+    @Column(({nullable: true}))
     @ApiProperty()
     twitterURL: string;
 
-    @Column()
+    @Column(({nullable: true}))
     @ApiProperty()
     country: string;
 }
