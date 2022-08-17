@@ -12,7 +12,11 @@ export class PlayersService {
 
   // find all
   getAllPlayers() {
-    return this.playerRepository.find();
+    return this.playerRepository.find({
+      order: {
+        nickName: 'ASC'
+      }
+    });
   }
 
   // Find one player by ID

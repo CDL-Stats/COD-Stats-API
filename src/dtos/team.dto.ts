@@ -8,6 +8,13 @@ export class UpdateTeamDTO {
   teamName?: string;
   teamLocation?: string;
   teamURL?: string;
+  primaryColor?: string;
+  secondaryColor?: string;
+  shortName?: string;
+  abbreviation?: string;
+  twitterURL?: string;
+  youtubeURL?: string;
+  instagramURL?: string;
 }
  
 export default UpdateTeamDTO;
