@@ -28,35 +28,35 @@ export class Player {
     @ApiProperty()
     team: Team;
 
-    @Column()
+    @Column({ nullable: true })
     @ApiProperty()
     active: boolean;
 
-    @Column()
+    @Column({ nullable: true })
     @ApiProperty()
     primaryWeapon: primaryWeapons;
 
-    @Column()
+    @Column({ nullable: true })
     @ApiProperty()
     birthDate: Date;
 
-    @Column()
+    @Column({ nullable: true })
     @ApiProperty()
     twitchURL: string;
 
-    @Column()
+    @Column({ nullable: true })
     @ApiProperty()
     youtubeURL: string;
 
-    @Column()
+    @Column({ nullable: true })
     @ApiProperty()
     instagramURL: string;
 
-    @Column()
+    @Column({ nullable: true })
     @ApiProperty()
     twitterURL: string;
 
-    @Column()
+    @Column({ nullable: true })
     @ApiProperty()
     country: string;
 }

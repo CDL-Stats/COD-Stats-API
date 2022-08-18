@@ -20,39 +20,39 @@ export class Team {
     @ApiProperty()
     teamName: string;
 
-    @Column()
+    @Column({ nullable: true })
     @ApiProperty()
     teamLogo: string;
 
     @OneToMany(() => Player, (player) => player.team)
     players: Player[]
 
-    @Column()
+    @Column({ nullable: true })
     @ApiProperty()
     primaryColor: string;
 
-    @Column()
+    @Column({ nullable: true })
     @ApiProperty()
     secondaryColor: string;
 
 
-    @Column()
+    @Column({ nullable: true })
     @ApiProperty()
     shortName: string;
 
-    @Column()
+    @Column({ nullable: true })
     @ApiProperty()
     abbreviation: string;
 
-    @Column()
+    @Column({ nullable: true })
     @ApiProperty()
     twitterURL: string;
 
-    @Column()
+    @Column({ nullable: true })
     @ApiProperty()
     youtubeURL: string;
 
-    @Column()
+    @Column({ nullable: true })
     @ApiProperty()
     instagramURL: string;
 }
