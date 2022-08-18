@@ -26,38 +26,37 @@ export class Player {
     
     @ManyToOne(() => Team, team => team.players, { eager: true })
     @ApiProperty()
-    @JoinColumn()
     team: Team;
 
-    @Column(({nullable: true}))
+    @Column()
     @ApiProperty()
     active: boolean;
 
-    @Column(({nullable: true}))
-    @ApiProperty({enum: primaryWeapons})
+    @Column()
+    @ApiProperty()
     primaryWeapon: primaryWeapons;
 
-    @Column(({nullable: true}))
+    @Column()
     @ApiProperty()
     birthDate: Date;
 
-    @Column(({nullable: true}))
+    @Column()
     @ApiProperty()
     twitchURL: string;
 
-    @Column(({nullable: true}))
+    @Column()
     @ApiProperty()
     youtubeURL: string;
 
-    @Column(({nullable: true}))
+    @Column()
     @ApiProperty()
     instagramURL: string;
 
-    @Column(({nullable: true}))
+    @Column()
     @ApiProperty()
     twitterURL: string;
 
-    @Column(({nullable: true}))
+    @Column()
     @ApiProperty()
     country: string;
 }

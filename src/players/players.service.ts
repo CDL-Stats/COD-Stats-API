@@ -74,7 +74,7 @@ export class PlayersService {
 
       // Create Player
       async createPlayer(postData: UpdatePlayerDTO) {
-        const newPlayer = await this.playerRepository.create(postData);
+        const newPlayer = this.playerRepository.create(postData);
         await this.playerRepository.save(newPlayer)
         if(newPlayer) {
             return newPlayer;

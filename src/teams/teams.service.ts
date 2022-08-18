@@ -37,7 +37,7 @@ export class TeamsService {
     
       // Create Team
       async createTeam(postData: UpdateTeamDTO) {
-        const newTeam = await this.teamRepoitory.create(postData);
+        const newTeam = this.teamRepoitory.create(postData);
         await this.teamRepoitory.save(newTeam)
         if(newTeam) {
             return newTeam;
