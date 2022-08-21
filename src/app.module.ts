@@ -8,6 +8,8 @@ import { TeamsModule } from './teams/teams.module';
 import { TeamsController } from './teams/teams.controller';
 import { TeamsService } from './teams/teams.service';
 import { Team } from './teams/team.entity';
+import { Tournament } from './tournament/tournament.entity';
+import { TournamentModule } from './tournament/tournament.module';
 
 @Module({
   imports:  [TypeOrmModule.forRoot({
@@ -17,9 +19,9 @@ import { Team } from './teams/team.entity';
     username: 'ncuser_12648',
     password: 'E3mHf0bVYBojPlDQNm7OGNCRlbcG32',
     database: 'codstatsapi',
-    entities: [Player, Team],
+    entities: [Player, Team, Tournament],
     synchronize: true,
-  }), PlayersModule, TeamsModule],
+  }), PlayersModule, TeamsModule, TournamentModule],
   controllers: [AppController],
   providers: [AppService],
 })
