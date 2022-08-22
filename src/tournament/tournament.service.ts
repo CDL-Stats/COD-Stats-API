@@ -12,12 +12,12 @@ export class TournamentService {
     
     // find all
     getAllTournaments() {
-        return this.tournamentRepository.find();
+        return this.tournamentRepository.find({relations: ["season"], loadRelationIds: true});
   }
 
     // Find one team by slug
     async getTournamentbyID(id: number) {
-    const tournament = await this.tournamentRepository.findOneBy({id: id});
+    const tournament = await this.tournamentRepository.findOne({where: {id: id}, relations: ["season"], loadRelationIds: true});
     if (tournament) {
         return tournament;
     }

@@ -1,5 +1,6 @@
 import { ApiProperty } from "@nestjsx/crud/lib/crud";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Season } from "src/season/season.entity";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 export enum tournamentType {
     regular_season = 'Regular Season',
@@ -39,4 +40,9 @@ export class Tournament{
     @Column({ nullable: true })
     @ApiProperty()
     city: string
+
+    @ManyToOne(() => Season, season => season.tournaments, { nullable: true })
+    @JoinColumn({name: "season_id",})
+    @ApiProperty()
+    season: Season
 }

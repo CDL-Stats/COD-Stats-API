@@ -22,7 +22,7 @@ export class TeamsService {
             return team;
         }
 
-        throw new HttpException('Player not found', HttpStatus.NOT_FOUND);
+        throw new HttpException('Team not found', HttpStatus.NOT_FOUND);
         }
 
     // Patch Team
@@ -32,7 +32,7 @@ export class TeamsService {
         if(updatedTeam) {
             return updatedTeam;
         }
-        throw new HttpException('Todo not found', HttpStatus.NOT_FOUND);
+        throw new HttpException('Team not found', HttpStatus.NOT_FOUND);
     }
     
       // Create Team
@@ -42,14 +42,14 @@ export class TeamsService {
         if(newTeam) {
             return newTeam;
         }
-        throw new HttpException('Todo not found', HttpStatus.NOT_FOUND);
+        throw new HttpException('Team not found', HttpStatus.NOT_FOUND);
     }
 
         // delete
         async deleteTeam(slug: string) {
-        const deletedTodo = await this.teamRepoitory.delete(slug);
-        if (!deletedTodo.affected) {
-            throw new HttpException('Todo not found', HttpStatus.NOT_FOUND);
+        const deletedTeam = await this.teamRepoitory.delete(slug);
+        if (!deletedTeam.affected) {
+            throw new HttpException('Team not found', HttpStatus.NOT_FOUND);
         }
         }
 }

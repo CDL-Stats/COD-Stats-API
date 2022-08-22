@@ -27,8 +27,8 @@ export class TournamentController {
     }
 
     // Update Team
-    @Patch(':slug')
-    async updateTournament(@Param('id') id: number, @Body() tournament: tournamentDTO) {
+    @Patch(':id')
+    async updateTournament(@Param('id') id: string, @Body() tournament: tournamentDTO) {
         return this.tournamentService.updateTournament(Number(id), tournament);
         }
 
