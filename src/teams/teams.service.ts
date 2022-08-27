@@ -27,7 +27,7 @@ export class TeamsService {
 
     // Patch Team
     async updateTeam(slug: string, postData: UpdateTeamDTO) {
-        await this.teamRepoitory.update(slug, postData);
+        await this.teamRepoitory.update({slug: slug}, postData);
         const updatedTeam = await this.teamRepoitory.findOneBy({slug: slug});
         if(updatedTeam) {
             return updatedTeam;

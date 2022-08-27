@@ -14,7 +14,7 @@ export class SeasonController {
     
     // Get Single Season
     @Get(':id')
-    getTeamBySlug(@Param('id') id: number) {
+    getSeasonByID(@Param('id') id: number) {
         return this.seasonService.getSeasonByID(Number(id));
     }
     

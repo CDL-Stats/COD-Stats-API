@@ -1,9 +1,14 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { Match } from "src/match/match.entity";
 import { Player } from "src/players/player.entity";
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Tournament } from "src/tournament/tournament.entity";
+import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Team {
+    push(teamEntity: Team) {
+        throw new Error('Method not implemented.');
+    }
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -55,4 +60,7 @@ export class Team {
     @Column({ nullable: true })
     @ApiProperty()
     instagramURL: string;
+
+    @ManyToMany(() => Match, (tournament) => tournament.teams)
+    matches: Match[]
 }

@@ -1,4 +1,6 @@
 import { ApiProperty } from "@nestjsx/crud/lib/crud";
+import { match } from "assert";
+import { Match } from "src/match/match.entity";
 import { Season } from "src/season/season.entity";
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
@@ -45,4 +47,7 @@ export class Tournament{
     @JoinColumn({name: "season_id",})
     @ApiProperty()
     season: Season
+
+    @OneToMany(() => Match, (match) => match.tournament, {cascade: true})
+    match: Match[]
 }

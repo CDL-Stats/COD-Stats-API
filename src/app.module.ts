@@ -12,6 +12,8 @@ import { Tournament } from './tournament/tournament.entity';
 import { TournamentModule } from './tournament/tournament.module';
 import { SeasonModule } from './season/season.module';
 import { Season } from './season/season.entity';
+import { MatchModule } from './match/match.module';
+import { Match } from './match/match.entity';
 
 @Module({
   imports:  [TypeOrmModule.forRoot({
@@ -21,9 +23,9 @@ import { Season } from './season/season.entity';
     username: 'ncuser_12648',
     password: 'E3mHf0bVYBojPlDQNm7OGNCRlbcG32',
     database: 'codstatsapi',
-    entities: [Player, Team, Tournament, Season],
+    entities: [Player, Team, Tournament, Season, Match],
     synchronize: true,
-  }), PlayersModule, TeamsModule, TournamentModule, SeasonModule],
+  }), PlayersModule, TeamsModule, TournamentModule, SeasonModule, MatchModule],
   controllers: [AppController],
   providers: [AppService],
 })
