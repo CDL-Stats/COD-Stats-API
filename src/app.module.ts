@@ -14,6 +14,10 @@ import { SeasonModule } from './season/season.module';
 import { Season } from './season/season.entity';
 import { MatchModule } from './match/match.module';
 import { Match } from './match/match.entity';
+import { MapsController } from './maps/maps.controller';
+import { MapsService } from './maps/maps.service';
+import { MapsModule } from './maps/maps.module';
+import { Map } from './maps/maps.entity';
 
 @Module({
   imports:  [TypeOrmModule.forRoot({
@@ -23,9 +27,9 @@ import { Match } from './match/match.entity';
     username: 'ncuser_12648',
     password: 'E3mHf0bVYBojPlDQNm7OGNCRlbcG32',
     database: 'codstatsapi',
-    entities: [Player, Team, Tournament, Season, Match],
+    entities: [Player, Team, Tournament, Season, Match, Map],
     synchronize: true,
-  }), PlayersModule, TeamsModule, TournamentModule, SeasonModule, MatchModule],
+  }), PlayersModule, TeamsModule, TournamentModule, SeasonModule, MatchModule, MapsModule],
   controllers: [AppController],
   providers: [AppService],
 })
