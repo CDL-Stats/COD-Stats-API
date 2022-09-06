@@ -18,18 +18,32 @@ import { MapsController } from './maps/maps.controller';
 import { MapsService } from './maps/maps.service';
 import { MapsModule } from './maps/maps.module';
 import { Map } from './maps/maps.entity';
+import { MatchTeamModule } from './match-team/match-team.module';
+import { MatchTeam } from './match-team/match-team.entity';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports:  [TypeOrmModule.forRoot({
-    type: 'mysql',
-    host: 'mysql-codstatsapi-19237.nodechef.com',
-    port: 2461,
-    username: 'ncuser_12648',
-    password: 'E3mHf0bVYBojPlDQNm7OGNCRlbcG32',
-    database: 'codstatsapi',
-    entities: [Player, Team, Tournament, Season, Match, Map],
-    synchronize: true,
-  }), PlayersModule, TeamsModule, TournamentModule, SeasonModule, MatchModule, MapsModule],
+  imports: [
+    ConfigModule.forRoot(),
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      host: process.env.DATABASE_HOST,
+      port: Number(process.env.DATABASE_PORT),
+      username: process.env.DATABASE_USERNAME,
+      password: process.env.DATABASE_PASSWORD,
+      database: process.env.DATABASE_NAME,
+      entities: [Player, Team, Tournament, Season, Match, Map, MatchTeam],
+      synchronize: true,
+      logging: true,
+    }),
+    PlayersModule,
+    TeamsModule,
+    TournamentModule,
+    SeasonModule,
+    MatchModule,
+    MapsModule,
+    MatchTeamModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "@nestjs/common": "^8.4.7",
+    "@nestjs/config": "^2.2.0",
     "@nestjs/core": "^8.4.7",
     "@nestjs/mongoose": "^9.2.0",
     "@nestjs/platform-express": "^8.0.0",
@@ -38,6 +39,7 @@
     "class-transformer": "^0.5.1",
     "class-validator": "^0.13.2",
     "denque": "^2.1.0",
+    "dotenv": "^16.0.2",
     "googleapis": "^105.0.0",
     "mongodb": "^4.8.1",
     "mongoose": "^6.5.0",
