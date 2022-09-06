@@ -34,7 +34,6 @@ import { ConfigModule } from '@nestjs/config';
       database: process.env.DATABASE_NAME,
       entities: [Player, Team, Tournament, Season, Match, Map, MatchTeam],
       synchronize: true,
-      logging: true,
     }),
     PlayersModule,
     TeamsModule,
