@@ -27,7 +27,4 @@ export class Round {
 
   @OneToMany(() => RoundTeam, (roundteam) => roundteam.round)
   teamScore: RoundTeam[];
-
-  @OneToMany(() => RoundPlayer, (roundteam) => roundteam.round)
-  playerRound: RoundPlayer[];
 }

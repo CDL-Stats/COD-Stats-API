@@ -1,8 +1,15 @@
 import { ApiProperty } from '@nestjsx/crud/lib/crud';
 import { Match } from 'src/match/match.entity';
+import { RoundPlayer } from 'src/round-player/round-player.entity';
 import { Round } from 'src/round/round.entity';
 import { Team } from 'src/teams/team.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class RoundTeam {
@@ -20,6 +27,9 @@ export class RoundTeam {
   @ManyToOne(() => Team, (team) => team.teamScore)
   @ApiProperty()
   team: Team;
+
+  @OneToMany(() => RoundPlayer, (rp) => rp.roundTeam)
+  playerRound: RoundPlayer;
 
   @Column()
   score: number;

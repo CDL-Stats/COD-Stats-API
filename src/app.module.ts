@@ -64,7 +64,7 @@ import { RoundPlayer } from './round-player/round-player.entity';
     RoundTeamModule,
     RoundPlayerModule,
   ],
-  controllers: [AppController, RoundTeamController, RoundPlayerController],
-  providers: [AppService, RoundTeamService, RoundPlayerService],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
