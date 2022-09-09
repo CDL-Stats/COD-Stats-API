@@ -94,12 +94,21 @@ export class MatchService {
     let newMatch = this.matchRepository.create(postData);
     await this.matchRepository.save(newMatch);
 
-    await this.matchTeamRepo
-      .createQueryBuilder()
-      .insert()
-      .into('match_team')
-      .values({ matchId: 4 })
-      .execute();
+    console.log(teamList.length);
+
+    teamList.map(async (team) => {
+      await this.matchTeamRepo
+        .createQueryBuilder()
+        .insert()
+        .into('match_team')
+        .values({
+          match: { id: newMatch.id },
+          team: {
+            id: team,
+          },
+        })
+        .execute();
+    });
 
     if (newMatch) {
       return newMatch;

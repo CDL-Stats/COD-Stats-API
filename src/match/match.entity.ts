@@ -1,5 +1,7 @@
 import { ApiProperty } from '@nestjsx/crud/lib/crud';
 import { MatchTeam } from 'src/match-team/match-team.entity';
+import { RoundTeam } from 'src/round-team/round-team.entity';
+import { Round } from 'src/round/round.entity';
 import { Team } from 'src/teams/team.entity';
 import { Tournament } from 'src/tournament/tournament.entity';
 import {
@@ -27,7 +29,7 @@ export class Match {
 
   @Column()
   @ApiProperty()
-  round: string;
+  tournamentRound: string;
 
   @Column()
   @ApiProperty()
@@ -39,4 +41,10 @@ export class Match {
 
   @OneToMany(() => MatchTeam, (matchTeam) => matchTeam.match)
   matchTeam: MatchTeam[];
+
+  @OneToMany(() => RoundTeam, (matchTeam) => matchTeam.match)
+  teamScore: RoundTeam[];
+
+  @OneToMany(() => Round, (round) => round.match)
+  round: Round[];
 }

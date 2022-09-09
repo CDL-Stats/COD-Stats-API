@@ -5,8 +5,6 @@ import { AppService } from './app.service';
 import { PlayersModule } from './players/players.module';
 import { Player } from './players/player.entity';
 import { TeamsModule } from './teams/teams.module';
-import { TeamsController } from './teams/teams.controller';
-import { TeamsService } from './teams/teams.service';
 import { Team } from './teams/team.entity';
 import { Tournament } from './tournament/tournament.entity';
 import { TournamentModule } from './tournament/tournament.module';
@@ -14,13 +12,21 @@ import { SeasonModule } from './season/season.module';
 import { Season } from './season/season.entity';
 import { MatchModule } from './match/match.module';
 import { Match } from './match/match.entity';
-import { MapsController } from './maps/maps.controller';
-import { MapsService } from './maps/maps.service';
 import { MapsModule } from './maps/maps.module';
 import { Map } from './maps/maps.entity';
 import { MatchTeamModule } from './match-team/match-team.module';
 import { MatchTeam } from './match-team/match-team.entity';
 import { ConfigModule } from '@nestjs/config';
+import { RoundModule } from './round/round.module';
+import { Round } from './round/round.entity';
+import { RoundTeamController } from './round-team/round-team.controller';
+import { RoundTeamService } from './round-team/round-team.service';
+import { RoundTeamModule } from './round-team/round-team.module';
+import { RoundTeam } from './round-team/round-team.entity';
+import { RoundPlayerController } from './round-player/round-player.controller';
+import { RoundPlayerService } from './round-player/round-player.service';
+import { RoundPlayerModule } from './round-player/round-player.module';
+import { RoundPlayer } from './round-player/round-player.entity';
 
 @Module({
   imports: [
@@ -32,8 +38,20 @@ import { ConfigModule } from '@nestjs/config';
       username: process.env.DATABASE_USERNAME,
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_NAME,
-      entities: [Player, Team, Tournament, Season, Match, Map, MatchTeam],
+      entities: [
+        Player,
+        Team,
+        Tournament,
+        Season,
+        Match,
+        Map,
+        MatchTeam,
+        Round,
+        RoundTeam,
+        RoundPlayer,
+      ],
       synchronize: true,
+      logging: true,
     }),
     PlayersModule,
     TeamsModule,
@@ -42,8 +60,11 @@ import { ConfigModule } from '@nestjs/config';
     MatchModule,
     MapsModule,
     MatchTeamModule,
+    RoundModule,
+    RoundTeamModule,
+    RoundPlayerModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController, RoundTeamController, RoundPlayerController],
+  providers: [AppService, RoundTeamService, RoundPlayerService],
 })
 export class AppModule {}

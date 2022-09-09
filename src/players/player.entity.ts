@@ -1,62 +1,73 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { Team } from "src/teams/team.entity";
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { ApiProperty } from '@nestjs/swagger';
+import { RoundPlayer } from 'src/round-player/round-player.entity';
+import { Team } from 'src/teams/team.entity';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 export enum primaryWeapons {
-    AR = 'AR',
-    Sub = 'Sub',
-  }
+  AR = 'AR',
+  Sub = 'Sub',
+}
 
 @Entity()
 export class Player {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    @ApiProperty()
-    firstName: string;
+  @Column()
+  @ApiProperty()
+  firstName: string;
 
-    @Column()
-    @ApiProperty()
-    lastName: string;
+  @Column()
+  @ApiProperty()
+  lastName: string;
 
-    @Column()
-    @ApiProperty()
-    nickName: string;
-    
-    @ManyToOne(() => Team, team => team.players, { eager: true })
-    @ApiProperty()
-    team: Team;
+  @Column()
+  @ApiProperty()
+  nickName: string;
 
-    @Column({ nullable: true })
-    @ApiProperty()
-    active: boolean;
+  @ManyToOne(() => Team, (team) => team.players, { eager: true })
+  @ApiProperty()
+  team: Team;
 
-    @Column({ nullable: true })
-    @ApiProperty()
-    primaryWeapon: primaryWeapons;
+  @Column({ nullable: true })
+  @ApiProperty()
+  active: boolean;
 
-    @Column({ nullable: true })
-    @ApiProperty()
-    birthDate: Date;
+  @Column({ nullable: true })
+  @ApiProperty()
+  primaryWeapon: primaryWeapons;
 
-    @Column({ nullable: true })
-    @ApiProperty()
-    twitchURL: string;
+  @Column({ nullable: true })
+  @ApiProperty()
+  birthDate: Date;
 
-    @Column({ nullable: true })
-    @ApiProperty()
-    youtubeURL: string;
+  @Column({ nullable: true })
+  @ApiProperty()
+  twitchURL: string;
 
-    @Column({ nullable: true })
-    @ApiProperty()
-    instagramURL: string;
+  @Column({ nullable: true })
+  @ApiProperty()
+  youtubeURL: string;
 
-    @Column({ nullable: true })
-    @ApiProperty()
-    twitterURL: string;
+  @Column({ nullable: true })
+  @ApiProperty()
+  instagramURL: string;
 
-    @Column({ nullable: true })
-    @ApiProperty()
-    country: string;
+  @Column({ nullable: true })
+  @ApiProperty()
+  twitterURL: string;
+
+  @Column({ nullable: true })
+  @ApiProperty()
+  country: string;
+
+  @OneToMany(() => RoundPlayer, (roundteam) => roundteam.round)
+  playerRound: RoundPlayer[];
 }
