@@ -5,7 +5,7 @@ import { PlayerHistoryService } from './player-history.service';
 export class PlayerHistoryController {
   constructor(private readonly playerHistoryService: PlayerHistoryService) {}
 
-  @Get(':team/:season')
+  @Get('/team/:team/:season')
   getRoundPlayer(@Param('team') team: Number, @Param('season') season: Number) {
     return this.playerHistoryService.getPlayerHistoryByTeamSeason(
       Number(team),
@@ -16,5 +16,10 @@ export class PlayerHistoryController {
   @Post()
   createPlayerHistory(@Body() playerHistory) {
     return this.playerHistoryService.postPlayerHistory(playerHistory);
+  }
+
+  @Get('/round/:id')
+  getByRoundTeam(@Param('id') id: Number) {
+    return this.playerHistoryService.getPlayersByRoundTeam(Number(id));
   }
 }

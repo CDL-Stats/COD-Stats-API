@@ -18,20 +18,40 @@ export class RoundPlayerService {
     const results = await this.roundPlayerRepo
       .createQueryBuilder('q')
       .select(
-        'q.id, q.kills, q.deaths, q.assists, q.nonTradedKills, q.highestStreak, q.damage, p.firstName, p.lastName, q.player, q.round, t.slug, r.game as gameMode, m.name as map',
+        'q.id, q.kills, q.deaths, q.assists, q.nonTradedKills, q.highestStreak, q.damage, p.firstName, p.lastName, q.player, t.slug, r.game as gameMode, m.name as map',
       )
       .leftJoin(Player, 'p', 'q.player = p.id')
-      .leftJoin(Round, 'r', 'q.round = r.id')
       .leftJoin(RoundTeam, 'rt', 'q.roundTeam = rt.id')
       .leftJoin(Team, 't', 'rt.team = t.id')
+      .leftJoin(Round, 'r', 'rt.round = r.id')
       .leftJoin(Map, 'm', 'r.map = m.id')
       .where('q.id = :id', { id: id })
       .getRawMany();
     return results;
   }
 
+  async getPlayerRoundByRound(id) {
+    const results = await this.roundPlayerRepo
+      .createQueryBuilder('q')
+      .select('q.id, q.kills, q.deaths, p.nickName, rt.id as teamID')
+      .leftJoin(Player, 'p', 'q.player = p.id')
+      .leftJoin(RoundTeam, 'rt', 'q.roundTeam = rt.id')
+      .where('rt.round = :id', { id: id })
+      .getRawMany();
+
+    const teamList = results.map((a: []) => a['teamID']);
+    let teamOne = [];
+    let teamTwo = [];
+    results.map((a: []) =>
+      a['teamID'] === teamList[0] ? teamOne.push(a) : teamTwo.push(a),
+    );
+    console.log(teamOne);
+    const teamResults = { one: [...teamOne], two: [...teamTwo] };
+    return teamResults;
+  }
+
   async postPlayerRound(postData) {
-    await this.roundPlayerRepo
+    const result = await this.roundPlayerRepo
       .createQueryBuilder()
       .insert()
       .into('round_player')
@@ -50,5 +70,29 @@ export class RoundPlayerService {
         },
       })
       .execute();
+    return result;
+  }
+
+  async patchPlayerRound(postData) {
+    const result = await this.roundPlayerRepo
+      .createQueryBuilder()
+      .update()
+      .set({
+        kills: postData.kills,
+        deaths: postData.deaths,
+        assists: postData.assists,
+        nonTradedKills: postData.nonTradedKills,
+        highestStreak: postData.highestStreak,
+        damage: postData.damage,
+        player: {
+          id: postData.player,
+        },
+        roundTeam: {
+          id: postData.roundTeam,
+        },
+      })
+      .where('id = :id', { id: postData.id })
+      .execute();
+    return result;
   }
 }

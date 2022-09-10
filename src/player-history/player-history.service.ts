@@ -1,8 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Match } from 'src/match/match.entity';
 import { Player } from 'src/players/player.entity';
+import { RoundTeam } from 'src/round-team/round-team.entity';
+import { Round } from 'src/round/round.entity';
 import { Season } from 'src/season/season.entity';
 import { Team } from 'src/teams/team.entity';
+import { Tournament } from 'src/tournament/tournament.entity';
 import { Repository } from 'typeorm';
 import { PlayerHistory } from './player-history.entity';
 
@@ -11,6 +15,7 @@ export class PlayerHistoryService {
   constructor(
     @InjectRepository(PlayerHistory)
     private readonly playerHistoryRepo: Repository<PlayerHistory>,
+    @InjectRepository(RoundTeam) private roundTeamRepo: Repository<RoundTeam>,
   ) {}
 
   async getPlayerHistoryByTeamSeason(team, season) {
@@ -36,8 +41,27 @@ export class PlayerHistoryService {
     return results;
   }
 
+  async getPlayersByRoundTeam(id) {
+    const results = await this.roundTeamRepo
+      .createQueryBuilder('q')
+      .select('q.id, p.id as playerID, p.nickName')
+      .leftJoin(Match, 'm', 'm.id = q.match')
+      .leftJoin(Tournament, 't', 't.id = m.tournament')
+      .leftJoin(
+        PlayerHistory,
+        'ph',
+        'ph.season = t.season and ph.team = q.team',
+      )
+      .leftJoin(Player, 'p', 'p.id = ph.player')
+      .where('q.id = :id', { id: id })
+      .orderBy('p.nickName')
+      .getRawMany();
+
+    return results;
+  }
+
   async postPlayerHistory(postData) {
-    await this.playerHistoryRepo
+    const results = await this.playerHistoryRepo
       .createQueryBuilder()
       .insert()
       .into('player_history')
@@ -53,5 +77,6 @@ export class PlayerHistoryService {
         },
       })
       .execute();
+    return results;
   }
 }
