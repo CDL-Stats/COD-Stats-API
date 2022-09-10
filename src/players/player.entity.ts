@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { PlayerHistory } from 'src/player-history/player-history.entity';
 import { RoundPlayer } from 'src/round-player/round-player.entity';
 import { Team } from 'src/teams/team.entity';
 import {
@@ -68,6 +69,9 @@ export class Player {
   @ApiProperty()
   country: string;
 
-  @OneToMany(() => RoundPlayer, (roundteam) => roundteam.round)
+  @OneToMany(() => RoundPlayer, (roundteam) => roundteam.player)
   playerRound: RoundPlayer[];
+
+  @OneToMany(() => PlayerHistory, (playerHistory) => playerHistory.player)
+  playerHistory: PlayerHistory[];
 }

@@ -27,6 +27,8 @@ import { RoundPlayerController } from './round-player/round-player.controller';
 import { RoundPlayerService } from './round-player/round-player.service';
 import { RoundPlayerModule } from './round-player/round-player.module';
 import { RoundPlayer } from './round-player/round-player.entity';
+import { PlayerHistoryModule } from './player-history/player-history.module';
+import { PlayerHistory } from './player-history/player-history.entity';
 
 @Module({
   imports: [
@@ -49,6 +51,7 @@ import { RoundPlayer } from './round-player/round-player.entity';
         Round,
         RoundTeam,
         RoundPlayer,
+        PlayerHistory,
       ],
       synchronize: true,
       logging: true,
@@ -63,6 +66,7 @@ import { RoundPlayer } from './round-player/round-player.entity';
     RoundModule,
     RoundTeamModule,
     RoundPlayerModule,
+    PlayerHistoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],
