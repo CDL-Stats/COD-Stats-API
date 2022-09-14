@@ -131,7 +131,7 @@ export class PlayersService {
       .values({
         firstName: postData.firstName,
         lastName: postData.lastName,
-        nickName: postData.lastName,
+        nickName: postData.nickName,
         active: postData.active,
         primaryWeapon: postData.primaryWeapon,
         birthDate: postData.birthDate,
