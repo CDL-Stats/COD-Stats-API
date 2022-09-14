@@ -25,14 +25,20 @@ export class MatchService {
 
     const foundMatches = await this.matchRepository.find({
       where: where,
-      relations: ['tournament'],
+      relations: { tournament: true },
     });
 
     const matches = foundMatches.map((match) => match.id);
+    let results;
 
-    const teams = await this.getTeamData(matches);
+    if (matches.length > 0) {
+      console.log('IM HERE');
+      const teams = await this.getTeamData(matches);
 
-    const results = await this.zipTeamandMatch(foundMatches, teams);
+      results = await this.zipTeamandMatch(foundMatches, teams);
+    } else {
+      results = matches;
+    }
 
     return results;
   }
