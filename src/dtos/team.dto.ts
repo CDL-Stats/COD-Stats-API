@@ -1,8 +1,7 @@
-import { Exclude, Type } from "class-transformer";
-import { IsNotEmpty, IsOptional, IsString } from "class-validator";
-import { Team } from "../teams/team.entity";
+import { Exclude, Type } from 'class-transformer';
+import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { Team } from '../teams/team.entity';
 
- 
 export class UpdateTeamDTO {
   slug: string;
   teamName?: string;
@@ -15,6 +14,7 @@ export class UpdateTeamDTO {
   twitterURL?: string;
   youtubeURL?: string;
   instagramURL?: string;
+  picture?: string;
 }
- 
+
 export default UpdateTeamDTO;

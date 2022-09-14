@@ -61,6 +61,10 @@ export class Team {
 
   @Column({ nullable: true })
   @ApiProperty()
+  pictureURL: string;
+
+  @Column({ nullable: true })
+  @ApiProperty()
   twitterURL: string;
 
   @Column({ nullable: true })

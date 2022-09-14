@@ -43,6 +43,10 @@ export class Player {
 
   @Column({ nullable: true })
   @ApiProperty()
+  pictureURL: string;
+
+  @Column({ nullable: true })
+  @ApiProperty()
   primaryWeapon: primaryWeapons;
 
   @Column({ nullable: true })

@@ -3,6 +3,9 @@ import { InjectRepository } from '@nestjs/typeorm';
 import UpdatePlayerDTO from 'src/dtos/putPlayer.dto';
 import { Repository } from 'typeorm';
 import { Player } from './player.entity';
+var AWS = require('aws-sdk');
+AWS.config.loadFromPath('src/s3_config.json');
+var s3Bucket = new AWS.S3({ params: { Bucket: 'codstattracker' } });
 
 @Injectable()
 export class PlayersService {
@@ -65,12 +68,54 @@ export class PlayersService {
 
   // Patch Player
   async updatePlayer(id: number, postData: UpdatePlayerDTO) {
+    if (postData['picture']) {
+      const url = await this.handlePicture(postData);
+      this.updatePictureURL(url, id);
+      delete postData.picture;
+    }
     await this.playerRepository.update(id, postData);
     const updatedPlayer = await this.playerRepository.findOneBy({ id: id });
     if (updatedPlayer) {
       return updatedPlayer;
     }
     throw new HttpException('Todo not found', HttpStatus.NOT_FOUND);
+  }
+
+  async updatePictureURL(pictureURL, id) {
+    return this.playerRepository
+      .createQueryBuilder()
+      .update()
+      .set({
+        pictureURL: pictureURL,
+      })
+      .where('id = :id', { id: id })
+      .execute();
+  }
+
+  async handlePicture(postData: UpdatePlayerDTO) {
+    const picture = postData.picture;
+    var buf = Buffer.from(
+      picture['file'].replace(/^data:image\/\w+;base64,/, ''),
+      'base64',
+    );
+
+    var data = {
+      Key: `players/${picture['fileName']}`,
+      Body: buf,
+      ContentEncoding: 'base64',
+      ContentType: 'image/jpeg',
+    };
+    const pictureData = await s3Bucket.putObject(
+      data,
+      await function (err, data) {
+        if (err) {
+          console.log(err);
+        }
+      },
+    );
+    if (pictureData['httpRequest']['stream']['finished']) {
+      return `https://codstattracker.s3.amazonaws.com/players/${picture['fileName']}`;
+    }
   }
 
   // Create Player
