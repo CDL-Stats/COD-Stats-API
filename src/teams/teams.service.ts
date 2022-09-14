@@ -5,7 +5,11 @@ import { Repository } from 'typeorm';
 import UpdateTeamDTO from '../dtos/team.dto';
 import { Team } from './team.entity';
 var AWS = require('aws-sdk');
-AWS.config.loadFromPath('src/s3_config.json');
+AWS.config = {
+  accessKeyId: process.env.AWS_ACCESS,
+  secretAccessKey: process.env.AWS_SECRET,
+  region: process.env.AWS_REGION,
+};
 var s3Bucket = new AWS.S3({ params: { Bucket: 'codstattracker' } });
 
 @Injectable()
