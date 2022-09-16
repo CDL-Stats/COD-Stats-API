@@ -39,6 +39,10 @@ export class Match {
   @ApiProperty()
   bestOf: number;
 
+  @Column()
+  @ApiProperty()
+  replayLink: string;
+
   @OneToMany(() => MatchTeam, (matchTeam) => matchTeam.match)
   matchTeam: MatchTeam[];
 

@@ -7,5 +7,6 @@ export default class matchDTO {
   tournamentRound: string;
   roundID: number;
   bestOf: number;
+  replayLink: string;
   teams: [];
 }
