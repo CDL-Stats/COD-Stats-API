@@ -18,7 +18,7 @@ export class RoundPlayerService {
     const results = await this.roundPlayerRepo
       .createQueryBuilder('q')
       .select(
-        'q.id, q.kills, q.deaths, q.assists, q.nonTradedKills, q.highestStreak, q.damage, p.firstName, p.lastName, q.player, t.slug, r.game as gameMode, m.name as map',
+        'q.id, q.kills, q.deaths, q.assists, q.nonTradedKills, q.highestStreak, q.damage, q.firstBloods, q.hillTime, q.plants, q.defuses, q.zoneCaptures, q.zoneTiersCaptured, q.p1Time, q.p2Time, q.p3Time, q.p4Time, q.p5Time, p.firstName, p.lastName, q.player, t.slug, r.game as gameMode, m.name as map',
       )
       .leftJoin(Player, 'p', 'q.player = p.id')
       .leftJoin(RoundTeam, 'rt', 'q.roundTeam = rt.id')
@@ -62,6 +62,15 @@ export class RoundPlayerService {
         nonTradedKills: postData.nonTradedKills,
         highestStreak: postData.highestStreak,
         damage: postData.damage,
+        firstBloods: postData.roundSpecific.firstBloods,
+        plants: postData.roundSpecific.plants,
+        defuses: postData.roundSpecific.defuses,
+        hillTime: postData.roundSpecific.hillTime,
+        p1Time: postData.roundSpecific.p1Time,
+        p2Time: postData.roundSpecific.p2Time,
+        p3Time: postData.roundSpecific.p3Time,
+        p4Time: postData.roundSpecific.p4Time,
+        p5Time: postData.roundSpecific.p5Time,
         player: {
           id: postData.player,
         },
@@ -84,6 +93,17 @@ export class RoundPlayerService {
         nonTradedKills: postData.nonTradedKills,
         highestStreak: postData.highestStreak,
         damage: postData.damage,
+        firstBloods: postData.roundSpecific.firstBloods,
+        plants: postData.roundSpecific.plants,
+        defuses: postData.roundSpecific.defuses,
+        hillTime: postData.roundSpecific.hillTime,
+        p1Time: postData.roundSpecific.p1Time,
+        p2Time: postData.roundSpecific.p2Time,
+        p3Time: postData.roundSpecific.p3Time,
+        p4Time: postData.roundSpecific.p4Time,
+        p5Time: postData.roundSpecific.p5Time,
+        zoneCaptures: postData.roundSpecific.zoneCapture,
+        zoneTiersCaptured: postData.roundSpecific.zoneTiers,
         player: {
           id: postData.player,
         },

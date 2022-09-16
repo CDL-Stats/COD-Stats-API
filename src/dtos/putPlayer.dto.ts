@@ -18,6 +18,7 @@ export class UpdatePlayerDTO {
   twitterURL?: string;
   country?: string;
   picture?: string;
+  firstBloods?: number;
 }
 
 export default UpdatePlayerDTO;

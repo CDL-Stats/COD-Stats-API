@@ -36,4 +36,37 @@ export class RoundPlayer {
 
   @Column()
   damage: number;
+
+  @Column({ nullable: true })
+  hillTime: number;
+
+  @Column({ nullable: true })
+  p1Time: number;
+
+  @Column({ nullable: true })
+  p2Time: number;
+
+  @Column({ nullable: true })
+  p3Time: number;
+
+  @Column({ nullable: true })
+  p4Time: number;
+
+  @Column({ nullable: true })
+  p5Time: number;
+
+  @Column({ nullable: true })
+  firstBloods: number;
+
+  @Column({ nullable: true })
+  plants: number;
+
+  @Column({ nullable: true })
+  defuses: number;
+
+  @Column({ nullable: true })
+  zoneCaptures: number;
+
+  @Column({ nullable: true })
+  zoneTiersCaptured: number;
 }
