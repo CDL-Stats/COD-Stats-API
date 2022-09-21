@@ -54,6 +54,7 @@ import { PlayerHistory } from './player-history/player-history.entity';
         PlayerHistory,
       ],
       synchronize: true,
+      logging: true,
     }),
     PlayersModule,
     TeamsModule,

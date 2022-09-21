@@ -1,6 +1,11 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { TypeOrmCrudService } from '@nestjsx/crud-typeorm';
+import { MatchTeam } from 'src/match-team/match-team.entity';
+import { Match } from 'src/match/match.entity';
+import { RoundTeam } from 'src/round-team/round-team.entity';
+import { Round } from 'src/round/round.entity';
+import { Tournament } from 'src/tournament/tournament.entity';
 import { Repository } from 'typeorm';
 import UpdateTeamDTO from '../dtos/team.dto';
 import { Team } from './team.entity';
@@ -34,6 +39,34 @@ export class TeamsService {
     }
 
     throw new HttpException('Team not found', HttpStatus.NOT_FOUND);
+  }
+
+  // Find schedule  by slug
+  async getScheduleBySlug(slug: string) {
+    const results = await this.teamRepoitory
+      .createQueryBuilder('q')
+      .select('q.slug, t.name, t.startDate, t.endDate')
+      .leftJoin(MatchTeam, 'mt', 'q.id = mt.team')
+      .leftJoin(Match, 'm', 'mt.match = m.id')
+      .leftJoin(Tournament, 't', 'm.tournament = t.id')
+      .where('q.slug = (:slug)', { slug: slug })
+      .groupBy('q.slug, t.name, t.startDate, t.endDate')
+      .orderBy('t.endDate', 'DESC')
+      .getRawMany();
+    return results;
+  }
+
+  // Stats by Season
+  async getTeamStats(slug: string) {
+    const results = await this.teamRepoitory
+      .createQueryBuilder('q')
+      .select('q.slug, r.game, SUM(rt.WL) / COUNT(rt.WL) as win_pct')
+      .leftJoin(RoundTeam, 'rt', 'q.id = rt.team')
+      .leftJoin(Round, 'r', 'r.id = rt.round')
+      .where('q.slug = (:slug)', { slug: slug })
+      .groupBy('q.slug, r.game')
+      .getRawMany();
+    return results;
   }
 
   // Patch Team
