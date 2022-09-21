@@ -25,16 +25,16 @@ export class RoundPlayer {
   @Column()
   deaths: number;
 
-  @Column()
+  @Column({ nullable: true })
   assists: number;
 
-  @Column()
+  @Column({ nullable: true })
   nonTradedKills: number;
 
-  @Column()
+  @Column({ nullable: true })
   highestStreak: number;
 
-  @Column()
+  @Column({ nullable: true })
   damage: number;
 
   @Column({ nullable: true })
