@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { RoundPlayerService } from './round-player.service';
 
 @Controller('round-player')
@@ -23,5 +31,10 @@ export class RoundPlayerController {
   @Patch(':id')
   updatePlayerRound(@Param('id') id: Number, @Body() roundPlayer) {
     return this.roundPlayerService.patchPlayerRound(roundPlayer);
+  }
+
+  @Delete(':id')
+  deleteRoundPlayer(@Param('id') id: Number) {
+    return this.roundPlayerService.deleteRoundPlayer(Number(id));
   }
 }

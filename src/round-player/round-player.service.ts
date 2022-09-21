@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Map } from 'src/maps/maps.entity';
 import { Player } from 'src/players/player.entity';
@@ -114,5 +114,15 @@ export class RoundPlayerService {
       .where('id = :id', { id: postData.id })
       .execute();
     return result;
+  }
+
+  // delete
+  async deleteRoundPlayer(id: number) {
+    const result = await this.roundPlayerRepo
+      .createQueryBuilder()
+      .delete()
+      .from(RoundPlayer)
+      .where('id = :id', { id: id })
+      .execute();
   }
 }
