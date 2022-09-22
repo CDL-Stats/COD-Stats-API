@@ -20,6 +20,9 @@ export class PlayersService {
   // find all
   getAllPlayers() {
     return this.playerRepository.find({
+      where: {
+        active: true,
+      },
       order: {
         nickName: 'ASC',
       },
